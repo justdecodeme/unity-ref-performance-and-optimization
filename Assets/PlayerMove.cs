@@ -12,6 +12,8 @@ public class PlayerMove : MonoBehaviour
   bool isGrounded = true;
   public Text coinText;
   private int counter;
+  public AudioSource audioSource;
+  public AudioClip audioClip;
 
 
   void Start()
@@ -54,6 +56,7 @@ public class PlayerMove : MonoBehaviour
       other.gameObject.SetActive(false);
       counter = counter - 1;
       coinText.text = "Coins: " + counter;
+      audioSource.PlayOneShot(audioClip);
       if (counter == 0)
       {
         SceneManager.LoadScene("3. End");

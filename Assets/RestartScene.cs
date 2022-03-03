@@ -12,6 +12,6 @@ public class RestartScene : MonoBehaviour
   void OnCollisionEnter()
   {
     Debug.Log("OnTriggerEnter");
-    SceneManager.LoadScene("Game");
+    SceneManager.LoadScene("2. Game");
   }
 }
