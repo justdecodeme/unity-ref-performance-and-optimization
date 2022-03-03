@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class PlayerMove : MonoBehaviour
 {
@@ -8,10 +10,15 @@ public class PlayerMove : MonoBehaviour
   public int ballSpeed = 10;
   public int jumpSpeed = 10;
   bool isGrounded = true;
+  public Text coinText;
+  private int counter;
+
 
   void Start()
   {
     rb = GetComponent<Rigidbody>();
+    counter = 20;
+    coinText.text = "Coins: " + counter;
   }
 
   void Update()
@@ -38,5 +45,19 @@ public class PlayerMove : MonoBehaviour
   void OnCollisionStay()
   {
     isGrounded = true;
+  }
+
+  void OnTriggerEnter(Collider other)
+  {
+    if (other.gameObject.CompareTag("Coin"))
+    {
+      other.gameObject.SetActive(false);
+      counter = counter - 1;
+      coinText.text = "Coins: " + counter;
+      if (counter == 0)
+      {
+        SceneManager.LoadScene("3. End");
+      }
+    }
   }
 }
